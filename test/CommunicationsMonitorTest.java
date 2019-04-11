@@ -1,24 +1,25 @@
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class CommunicationsMonitorTest {
 
-    @org.junit.Test
+    @Test
     public void addCommunication() {
     }
 
-    @org.junit.Test
+    @Test
     public void createGraph() {
     }
 
-    @org.junit.Test
+    @Test
     public void queryInfection() {
     }
 
-    @org.junit.Test
+    @Test
     public void getComputerMapping() {
     }
 
-    @org.junit.Test
+    @Test
     public void getComputerMapping1() {
     }
 }
