@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * The CommunicationsMonitor class represents the graph G built to answer
@@ -11,18 +12,21 @@ import java.util.List;
  */
 public class CommunicationsMonitor {
 
+    private ArrayList<ComputerNode> nodeList;
+
     /**
      * Constructor with no parameters
      */
     public CommunicationsMonitor() {
         // TODO -- implement
+        nodeList = new ArrayList<ComputerNode>();
     }
 
     /**
-     * Takes as input two integers c1,c2, and a timestamp. This triple
+     * Takes as input two integers c1, c2, and a timestamp. This triple
      * represents the fact that the computers with IDs c1 and c2 have
      * communicated at the given timestamp. This method should run in O(1) time.
-     * Any invocation of this method after createGraph()is called will be
+     * Any invocation of this method after createGraph() is called will be
      * ignored.
      * @param c1
      * @param c2
@@ -30,6 +34,10 @@ public class CommunicationsMonitor {
      */
     public void addCommunication(int c1, int c2, int timestamp) {
         // TODO -- implement
+        ComputerNode x = new ComputerNode(c1, timestamp);
+        ComputerNode y = new ComputerNode(c2, timestamp);
+        nodeList.add(x);
+        nodeList.add(y);
     }
 
     /**
@@ -45,7 +53,7 @@ public class CommunicationsMonitor {
      * c1 was infected at time x. If so, the method returns an ordered list of
      * ComputerNode objects that represents the transmission sequence. This
      * sequence is a path in graph G. The first Computer Node object on the
-     * path will correspond toc1. Similarly, the lastComputer Node object on
+     * path will correspond to c1. Similarly, the lastComputer Node object on
      * the path will correspond to c2. If c2 cannot be infected, return null.
      *
      * Example 3.In Example 1, an infection path would be (C1,4),(C2,4),(C2,8),
