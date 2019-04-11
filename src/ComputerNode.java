@@ -10,13 +10,26 @@ import java.util.List;
  */
 public class ComputerNode {
 
+    // Instance variables
+    private int ID;
+    private int timestamp;
+
+    /**
+     * ComputerNode constructor.
+     * @param ID - The ID associated with this node.
+     * @param timestamp - The timestamp associated with this node.
+     */
+    public ComputerNode(int ID, int timestamp) {
+        this.ID = ID;
+        this.timestamp = timestamp;
+    }
+
     /**
      * Returns the ID of the associated computer.
      * @return
      */
     public int getID() {
-        // TODO -- implement
-        return 0;
+        return ID;
     }
 
     /**
@@ -24,8 +37,7 @@ public class ComputerNode {
      * @return
      */
     public int getTimestamp() {
-        // TODO -- implement
-        return 0;
+        return timestamp;
     }
 
     /**
