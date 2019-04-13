@@ -55,6 +55,14 @@ public class CommunicationsMonitorTest {
         assertEquals(8, commList.get(1).getTk());
         assertEquals(8, commList.get(2).getTk());
         assertEquals(12, commList.get(3).getTk());
+
+        // Test that all computers are initialized in HashMap
+        assertTrue(monitor.getComputerMapping(1) != null);
+        assertTrue(monitor.getComputerMapping(2) != null);
+        assertTrue(monitor.getComputerMapping(3) != null);
+        assertTrue(monitor.getComputerMapping(4) != null);
+        assertTrue(monitor.getComputerMapping(5) == null);
+
     }
 
     @Test
