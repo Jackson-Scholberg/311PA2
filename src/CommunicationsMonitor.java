@@ -272,7 +272,7 @@ public class CommunicationsMonitor {
             infectedPath.add(0, curNode);
             curNode = curNode.getPrev();
         }
-        infectedPath.add(start);
+        infectedPath.add(0, start);
         return infectedPath;
     }
 }
