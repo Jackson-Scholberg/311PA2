@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * The ComputerNode class represents the nodes of the graph G, which are pairs
@@ -13,6 +14,7 @@ public class ComputerNode {
     // Instance variables
     private int ID;
     private int timestamp;
+    private ArrayList<ComputerNode> neighbors;
 
     /**
      * ComputerNode constructor.
@@ -22,6 +24,7 @@ public class ComputerNode {
     public ComputerNode(int ID, int timestamp) {
         this.ID = ID;
         this.timestamp = timestamp;
+        this.neighbors = new ArrayList<ComputerNode>();
     }
 
     /**
@@ -47,6 +50,10 @@ public class ComputerNode {
      */
     public List<ComputerNode> getOutNeighbors() {
         // TODO -- implement
-        return null;
+        return neighbors;
+    }
+
+    public void addNeighbor(ComputerNode n) {
+        neighbors.add(n);
     }
 }
