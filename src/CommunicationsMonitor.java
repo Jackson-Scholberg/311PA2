@@ -150,6 +150,11 @@ public class CommunicationsMonitor {
             }
         }
 
+        // If no node is infected, return null
+        if(infected == null) {
+            return null;
+        }
+
         // Set all nodes to default DFS values
         for (List<ComputerNode> list : computerMapping.values()){
             for(ComputerNode node : list){
@@ -159,9 +164,6 @@ public class CommunicationsMonitor {
         }
 
         // Run DFS Visit to find connected components
-        if(infected == null) {
-            return null;
-        }
         DFSVisit(infected);
 
         // Check if each node can be reached from infected
@@ -169,9 +171,9 @@ public class CommunicationsMonitor {
             for (ComputerNode curNode : list) {
                 if( curNode.getColor() == Color.BLACK &&
                         curNode.getID() == c2 &&
-                        curNode.getTimestamp() <= y) { // Node can be infected
-
-                    // Create list from current node
+                        curNode.getTimestamp() <= y) { // Computer can be
+                                                       // infected
+                    // Return infected path from c1 to c2
                     return createInfectedPath(infected, curNode);
                 }
             }
