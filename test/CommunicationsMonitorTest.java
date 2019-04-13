@@ -76,7 +76,12 @@ public class CommunicationsMonitorTest {
         assertEquals(12, c1Twelve.getTimestamp());
 
         // Test C1 Neighbors
-        assertEquals(3, c1Four.getOutNeighbors().size());
+        assertEquals(2, c1Four.getOutNeighbors().size());
+        assertEquals(2, c1Four.getOutNeighbors().get(0).getID());
+        assertEquals(4, c1Four.getOutNeighbors().get(0).getTimestamp());
+        assertEquals(1, c1Four.getOutNeighbors().get(1).getID());
+        assertEquals(12,
+                c1Four.getOutNeighbors().get(1).getTimestamp());
 
 
     }

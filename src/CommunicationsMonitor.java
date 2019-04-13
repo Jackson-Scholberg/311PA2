@@ -76,16 +76,18 @@ public class CommunicationsMonitor {
                 computerMapping.get(comm.getCj()).add(cj);
 
                 // Add analogous edges for Ci
-                List<ComputerNode> ciNeighbors = ci.getOutNeighbors();
-                if( ciNeighbors.size() > 1 ) {
-                    ComputerNode prev = ciNeighbors.get(ciNeighbors.size() - 2);
+                List<ComputerNode> ciMapping =
+                        computerMapping.get(comm.getCi());
+                if( ciMapping.size() > 1 ) {
+                    ComputerNode prev = ciMapping.get(ciMapping.size() - 2);
                     prev.addNeighbor(ci);
                 }
 
                 // Add analogous edges for Cj
-                List<ComputerNode> cjNeighbors = cj.getOutNeighbors();
-                if( cjNeighbors.size() > 1 ) {
-                    ComputerNode prev = cjNeighbors.get(cjNeighbors.size() - 2);
+                List<ComputerNode> cjMapping =
+                        computerMapping.get(comm.getCj());
+                if( cjMapping.size() > 1 ) {
+                    ComputerNode prev = cjMapping.get(cjMapping.size() - 2);
                     prev.addNeighbor(cj);
                 }
             }
