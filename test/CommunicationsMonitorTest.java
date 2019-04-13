@@ -97,4 +97,15 @@ public class CommunicationsMonitorTest {
     @Test
     public void getComputerMapping1() {
     }
+
+    @Test
+    public void DFS(){
+        monitor.addCommunication(1,2,4);
+        monitor.addCommunication(2,4,8);
+        monitor.addCommunication(3,4,8);
+        monitor.addCommunication(1,4,12);
+        monitor.createGraph();
+
+
+    }
 }

@@ -17,6 +17,7 @@ public class ComputerNode {
     private ArrayList<ComputerNode> neighbors;
     private Color color;
     private ComputerNode prev;
+    private int cc;
 
     /**
      * ComputerNode constructor.
@@ -27,6 +28,7 @@ public class ComputerNode {
         this.ID = ID;
         this.timestamp = timestamp;
         this.neighbors = new ArrayList<>();
+        this.cc = 0;
     }
 
     /**
@@ -77,5 +79,13 @@ public class ComputerNode {
 
     public ComputerNode getPrev(){
         return prev;
+    }
+
+    public int getCC(){
+        return cc;
+    }
+
+    public void setCC(int cc){
+        this.cc = cc;
     }
 }
