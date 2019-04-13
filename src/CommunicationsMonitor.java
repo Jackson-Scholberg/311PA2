@@ -156,16 +156,23 @@ public class CommunicationsMonitor {
 
     public void DFS(HashMap<Integer, List<ComputerNode>> graph){
 
-        boolean[] visited = new boolean[graph.size()];
+        Color[] visited = new Color[graph.size()];
 
-        for (HashMap.Entry<Integer, List<ComputerNode>> node : graph.entrySet()){
-            if (visited[node.getKey()]){
-                DFSVisit(graph, node.getValue(), visited);
+        for (List<ComputerNode> list : graph.values()){
+            for(ComputerNode node : list){
+                if (visited[node.getID()] == Color.WHITE)
+                    DFSVisit(node, visited);
             }
+
         }
     }
 
-    public void DFSVisit(HashMap graph, List<ComputerNode> node, boolean[] visited){
-            
+    public void DFSVisit(ComputerNode node, Color[] visited){
+        visited[node.getID()] = Color.GREY;
+        for(ComputerNode neighbor : node.getOutNeighbors()){
+            if (visited[neighbor.getID()] == Color.WHITE)
+                DFSVisit(neighbor, visited);
+        }
+        visited[node.getID()] = Color.BLACK;
     }
 }
