@@ -116,7 +116,7 @@ public class CommunicationsMonitorTest {
 
         // Test C4 Communications
         List<ComputerNode> c4Mapping = monitor.getComputerMapping(4);
-        //assertEquals(2, c4Mapping.size());
+        assertEquals(2, c4Mapping.size());
         ComputerNode c4Eight = c4Mapping.get(0);
         ComputerNode c4Twelve = c4Mapping.get(1);
         assertEquals(4, c4Eight.getID());
