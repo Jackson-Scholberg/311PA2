@@ -1,6 +1,4 @@
-import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * The CommunicationsMonitor class represents the graph G built to answer
@@ -51,7 +49,10 @@ public class CommunicationsMonitor {
      */
     public void createGraph() {
         if( !createGraphCalled ) {
-            // TODO -- implement
+
+            // Sort the communications list
+            Collections.sort(communicationList);
+
             createGraphCalled = true;
         }
     }

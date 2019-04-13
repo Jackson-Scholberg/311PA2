@@ -1,7 +1,7 @@
 /**
  * Simple container class that holds a communication triple
  */
-public class CommunicationTriple {
+public class CommunicationTriple implements Comparable<CommunicationTriple>{
 
     // Instance variables
     private int ci;
@@ -36,5 +36,15 @@ public class CommunicationTriple {
      */
     public int getTk() {
         return tk;
+    }
+
+    /**
+     * A CommunicationTriple gets compared by its timestamp
+     * @param other - the CommunicationTriple we are comparing
+     * @return
+     */
+    @Override
+    public int compareTo(CommunicationTriple other) {
+        return this.getTk() - other.getTk();
     }
 }
