@@ -139,8 +139,16 @@ public class CommunicationsMonitor {
      * @return
      */
     public List<ComputerNode> queryInfection(int c1, int c2, int x, int y) {
-        // TODO -- implement
-        return null;
+
+        for (List<ComputerNode> list : computerMapping.values()){
+            for(ComputerNode node : list){
+                node.setColor(Color.WHITE);
+                node.setPrev(null);
+            }
+        }
+
+        List<ComputerNode> node1 = computerMapping.get(c1);
+        List<ComputerNode> node2 = computerMapping.get(c2);
     }
 
     /**
