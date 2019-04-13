@@ -27,8 +27,6 @@ public class ComputerNode {
         this.ID = ID;
         this.timestamp = timestamp;
         this.neighbors = new ArrayList<>();
-        this.color = Color.WHITE;
-        this.prev = null;
     }
 
     /**

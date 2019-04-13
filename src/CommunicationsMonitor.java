@@ -160,12 +160,19 @@ public class CommunicationsMonitor {
      * @param graph graph of trace data
      */
     public void DFS(HashMap<Integer, List<ComputerNode>> graph){
+
+        for (List<ComputerNode> list : graph.values()){
+            for(ComputerNode node : list){
+                node.setColor(Color.WHITE);
+                node.setPrev(null);
+            }
+        }
+
         for (List<ComputerNode> list : graph.values()){
             for(ComputerNode node : list){
                 if (node.getColor() == Color.WHITE)
                     DFSVisit(node);
             }
-
         }
     }
 
