@@ -53,6 +53,10 @@ public class ComputerNode {
         return neighbors;
     }
 
+    //-------------------------------------------------------------------------
+    // Helper Methods
+    //-------------------------------------------------------------------------
+
     public void addNeighbor(ComputerNode n) {
         neighbors.add(n);
     }
