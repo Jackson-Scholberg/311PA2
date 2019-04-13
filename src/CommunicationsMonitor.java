@@ -53,6 +53,17 @@ public class CommunicationsMonitor {
             // Sort the communications list
             Collections.sort(communicationList);
 
+            // Add key entries for each computer to HashMap
+            for(int i = 0; i < communicationList.size(); i++) {
+                CommunicationTriple comm = communicationList.get(i);
+
+                // Initialize computers (keys) in HashMap if they don't exist
+                computerMapping.computeIfAbsent(comm.getCi(),
+                        k -> new ArrayList<ComputerNode>());
+                computerMapping.computeIfAbsent(comm.getCj(),
+                        k -> new ArrayList<ComputerNode>());
+            }
+
             createGraphCalled = true;
         }
     }
