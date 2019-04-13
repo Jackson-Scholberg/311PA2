@@ -12,9 +12,10 @@ import java.util.ArrayList;
  */
 public class CommunicationsMonitor {
 
-//    instance variables
+    // Instance variables
     private ArrayList<ComputerNode> communicationList;
     private HashMap<Integer, List<ComputerNode>> computerMapping;
+    private boolean createGraphCalled = false;
 
     /**
      * Constructor with no parameters
@@ -36,11 +37,14 @@ public class CommunicationsMonitor {
      * @param timestamp
      */
     public void addCommunication(int c1, int c2, int timestamp) {
-        // TODO -- implement
-        ComputerNode x = new ComputerNode(c1, timestamp);
-        ComputerNode y = new ComputerNode(c2, timestamp);
-        communicationList.add(x);
-        communicationList.add(y);
+        if( !createGraphCalled ) {  // Ignore if createGraph() is called
+
+            // Create two nodes and add to ArrayList
+            ComputerNode x = new ComputerNode(c1, timestamp);
+            ComputerNode y = new ComputerNode(c2, timestamp);
+            communicationList.add(x);
+            communicationList.add(y);
+        }
     }
 
     /**
@@ -48,7 +52,10 @@ public class CommunicationsMonitor {
      * method should run in O(n + mlogm) time.
      */
     public void createGraph() {
-        // TODO -- implement
+        if( !createGraphCalled ) {
+            // TODO -- implement
+            createGraphCalled = true;
+        }
     }
 
     /**
@@ -98,5 +105,17 @@ public class CommunicationsMonitor {
     public List<ComputerNode> getComputerMapping(int c) {
         // TODO -- implement
         return computerMapping.get(c);
+    }
+
+    //-------------------------------------------------------------------------
+    // Helper Methods
+    //-------------------------------------------------------------------------
+
+    /**
+     * Returns the communication list, before it's turned into a graph
+     * @return
+     */
+    public ArrayList<ComputerNode> getCommunicationList() {
+        return communicationList;
     }
 }
