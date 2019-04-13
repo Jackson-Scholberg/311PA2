@@ -14,7 +14,7 @@ public class CommunicationsMonitor {
 
 //    instance variables
     private ArrayList<ComputerNode> communicationList;
-    private HashMap<Integer, ComputerNode> computerMapping;
+    private HashMap<Integer, List<ComputerNode>> computerMapping;
 
     /**
      * Constructor with no parameters
@@ -22,7 +22,7 @@ public class CommunicationsMonitor {
     public CommunicationsMonitor() {
         // TODO -- implement
         communicationList = new ArrayList<ComputerNode>();
-        computerMapping = new HashMap<Integer, ComputerNode>();
+        computerMapping = new HashMap<Integer, List<ComputerNode>>();
     }
 
     /**
@@ -86,7 +86,7 @@ public class CommunicationsMonitor {
      */
     public HashMap<Integer, List<ComputerNode>> getComputerMapping() {
         // TODO -- implement
-        return null;
+        return computerMapping;
     }
 
     /**
@@ -97,6 +97,6 @@ public class CommunicationsMonitor {
      */
     public List<ComputerNode> getComputerMapping(int c) {
         // TODO -- implement
-        return null;
+        return computerMapping.get(c);
     }
 }
