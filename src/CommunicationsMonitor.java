@@ -140,6 +140,17 @@ public class CommunicationsMonitor {
      */
     public List<ComputerNode> queryInfection(int c1, int c2, int x, int y) {
 
+        // Find first infected node after given timestamp
+        List<ComputerNode> c1List = getComputerMapping(c1);
+        ComputerNode infected = null;
+        for(int i = 0; i < c1List.size(); i++) {
+            if(c1List.get(i).getTimestamp() >= x) {
+                infected = c1List.get(i);
+                break;
+            }
+        }
+
+        // Set all nodes to default DFS values
         for (List<ComputerNode> list : computerMapping.values()){
             for(ComputerNode node : list){
                 node.setColor(Color.WHITE);
@@ -147,8 +158,25 @@ public class CommunicationsMonitor {
             }
         }
 
-        List<ComputerNode> node1 = computerMapping.get(c1);
-        List<ComputerNode> node2 = computerMapping.get(c2);
+        // Run DFS Visit to find connected components
+        if(infected == null) {
+            return null;
+        }
+        DFSVisit(infected);
+
+        // Check if each node can be reached from infected
+        for (List<ComputerNode> list : computerMapping.values()) {
+            for (ComputerNode curNode : list) {
+                if( curNode.getColor() == Color.BLACK &&
+                        curNode.getID() == c2 &&
+                        curNode.getTimestamp() <= y) { // Node can be infected
+
+                    // Create list from current node
+                    return createInfectedPath(infected, curNode);
+                }
+            }
+        }
+        return null;    // c2 cannot be infected
     }
 
     /**
@@ -228,5 +256,23 @@ public class CommunicationsMonitor {
             }
         }
         node.setColor(Color.BLACK);
+    }
+
+    /**
+     * Creates an infected path from the start node to the infected node
+     * @param start
+     * @param end
+     * @return
+     */
+    public List<ComputerNode> createInfectedPath(ComputerNode start,
+                                                 ComputerNode end) {
+        List<ComputerNode> infectedPath = new ArrayList<ComputerNode>();
+        ComputerNode curNode = end;
+        while(curNode != start) {
+            infectedPath.add(0, curNode);
+            curNode = curNode.getPrev();
+        }
+        infectedPath.add(start);
+        return infectedPath;
     }
 }
