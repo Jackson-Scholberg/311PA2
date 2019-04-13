@@ -131,19 +131,21 @@ public class CommunicationsMonitor {
 
         Color[] visited = new Color[graph.size()];
 
-        for (HashMap.Entry<Integer, List<ComputerNode>> node : graph.entrySet()){
-            if (visited[node.getKey()] == Color.WHITE){
-                DFSVisit(node, visited);
+        for (List<ComputerNode> list : graph.values()){
+            for(ComputerNode node : list){
+                if (visited[node.getID()] == Color.WHITE)
+                    DFSVisit(node, visited);
             }
+
         }
     }
 
-    public void DFSVisit(HashMap.Entry<Integer, List<ComputerNode>> node, Color[] visited){
-        visited[node.getKey()] = Color.GREY;
-        for(ComputerNode neighbor : node.getValue().){
-            if (visited[neighbor.getKey()] == Color.WHITE)
+    public void DFSVisit(ComputerNode node, Color[] visited){
+        visited[node.getID()] = Color.GREY;
+        for(ComputerNode neighbor : node.getOutNeighbors()){
+            if (visited[neighbor.getID()] == Color.WHITE)
                 DFSVisit(neighbor, visited);
         }
-        visited[node.getKey()] = Color.BLACK;
+        visited[node.getID()] = Color.BLACK;
     }
 }
