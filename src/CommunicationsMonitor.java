@@ -114,4 +114,19 @@ public class CommunicationsMonitor {
     public ArrayList<CommunicationTriple> getCommunicationList() {
         return communicationList;
     }
+
+    public void DFS(HashMap<Integer, List<ComputerNode>> graph){
+
+        boolean[] visited = new boolean[graph.size()];
+
+        for (HashMap.Entry<Integer, List<ComputerNode>> node : graph.entrySet()){
+            if (visited[node.getKey()]){
+                DFSVisit(graph, node.getValue(), visited);
+            }
+        }
+    }
+
+    public void DFSVisit(HashMap graph, List<ComputerNode> node, boolean[] visited){
+            
+    }
 }
