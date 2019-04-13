@@ -20,12 +20,12 @@ public class CommunicationsMonitorTest {
 
         // Insert a tuple
         monitor.addCommunication(1, 2, 3);
-        assertEquals(2, monitor.getCommunicationList().size());
+        assertEquals(1, monitor.getCommunicationList().size());
 
         // Shouldn't work after createGraph() is called
         monitor.createGraph();
         monitor.addCommunication(5, 6, 7);
-        assertEquals(2, monitor.getCommunicationList().size());
+        assertEquals(1, monitor.getCommunicationList().size());
     }
 
     @Test

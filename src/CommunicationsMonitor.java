@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class CommunicationsMonitor {
 
     // Instance variables
-    private ArrayList<ComputerNode> communicationList;
+    private ArrayList<CommunicationTriple> communicationList;
     private HashMap<Integer, List<ComputerNode>> computerMapping;
     private boolean createGraphCalled = false;
 
@@ -22,7 +22,7 @@ public class CommunicationsMonitor {
      */
     public CommunicationsMonitor() {
         // TODO -- implement
-        communicationList = new ArrayList<ComputerNode>();
+        communicationList = new ArrayList<CommunicationTriple>();
         computerMapping = new HashMap<Integer, List<ComputerNode>>();
     }
 
@@ -37,13 +37,11 @@ public class CommunicationsMonitor {
      * @param timestamp
      */
     public void addCommunication(int c1, int c2, int timestamp) {
-        if( !createGraphCalled ) {  // Ignore if createGraph() is called
+        // Ignore if createGraph() is called
+        if( !createGraphCalled ) {
 
-            // Create two nodes and add to ArrayList
-            ComputerNode x = new ComputerNode(c1, timestamp);
-            ComputerNode y = new ComputerNode(c2, timestamp);
-            communicationList.add(x);
-            communicationList.add(y);
+            // Add new communication to communication list
+            communicationList.add(new CommunicationTriple(c1, c2, timestamp));
         }
     }
 
@@ -92,7 +90,6 @@ public class CommunicationsMonitor {
      * @return
      */
     public HashMap<Integer, List<ComputerNode>> getComputerMapping() {
-        // TODO -- implement
         return computerMapping;
     }
 
@@ -103,7 +100,6 @@ public class CommunicationsMonitor {
      * @return
      */
     public List<ComputerNode> getComputerMapping(int c) {
-        // TODO -- implement
         return computerMapping.get(c);
     }
 
@@ -115,7 +111,7 @@ public class CommunicationsMonitor {
      * Returns the communication list, before it's turned into a graph
      * @return
      */
-    public ArrayList<ComputerNode> getCommunicationList() {
+    public ArrayList<CommunicationTriple> getCommunicationList() {
         return communicationList;
     }
 }
