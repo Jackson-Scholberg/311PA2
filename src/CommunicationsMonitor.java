@@ -12,14 +12,15 @@ import java.util.ArrayList;
  */
 public class CommunicationsMonitor {
 
-    private ArrayList<ComputerNode> nodeList;
+//    instance variables
+    private ArrayList<ComputerNode> communicationList;
 
     /**
      * Constructor with no parameters
      */
     public CommunicationsMonitor() {
         // TODO -- implement
-        nodeList = new ArrayList<ComputerNode>();
+        communicationList = new ArrayList<ComputerNode>();
     }
 
     /**
@@ -36,8 +37,8 @@ public class CommunicationsMonitor {
         // TODO -- implement
         ComputerNode x = new ComputerNode(c1, timestamp);
         ComputerNode y = new ComputerNode(c2, timestamp);
-        nodeList.add(x);
-        nodeList.add(y);
+        communicationList.add(x);
+        communicationList.add(y);
     }
 
     /**
