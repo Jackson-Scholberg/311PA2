@@ -157,6 +157,12 @@ public class CommunicationsMonitorTest {
         monitor.addCommunication(1,4,12);
         monitor.createGraph();
 
+        monitor.DFS(monitor.getComputerMapping());
 
+        for (List<ComputerNode> list : monitor.getComputerMapping().values()){
+            for(ComputerNode node : list){
+                assertEquals(Color.BLACK, node.getColor());
+            }
+        }
     }
 }

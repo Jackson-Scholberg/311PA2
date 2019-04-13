@@ -171,10 +171,11 @@ public class CommunicationsMonitor {
         int ctr = 1;
         for (List<ComputerNode> list : graph.values()){
             for(ComputerNode node : list){
-                if (node.getColor() == Color.WHITE)
+                if (node.getColor() == Color.WHITE){
                     node.setCC(ctr);
                     ctr++;
                     DFSVisit(node);
+                }
             }
         }
     }
@@ -189,9 +190,10 @@ public class CommunicationsMonitor {
         node.setColor(Color.GREY);
         for(ComputerNode neighbor : node.getOutNeighbors()){
             neighbor.setCC(node.getCC());
-            if (node.getColor() == Color.WHITE)
+            if (node.getColor() == Color.WHITE){
                 neighbor.setPrev(node);
                 DFSVisit(neighbor);
+            }
         }
         node.setColor(Color.BLACK);
     }
