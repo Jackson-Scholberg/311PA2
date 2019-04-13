@@ -62,8 +62,33 @@ public class CommunicationsMonitor {
                         k -> new ArrayList<ComputerNode>());
                 computerMapping.computeIfAbsent(comm.getCj(),
                         k -> new ArrayList<ComputerNode>());
-            }
 
+                // Create two ComputerNodes from triple
+                ComputerNode ci = new ComputerNode(comm.getCi(), comm.getTk());
+                ComputerNode cj = new ComputerNode(comm.getCj(), comm.getTk());
+
+                // Add directed edges of triple to nodes
+                ci.addNeighbor(cj);
+                cj.addNeighbor(ci);
+
+                // Add references of nodes to HashMap
+                computerMapping.get(comm.getCi()).add(ci);
+                computerMapping.get(comm.getCj()).add(cj);
+
+                // Add analogous edges for Ci
+                List<ComputerNode> ciNeighbors = ci.getOutNeighbors();
+                if( ciNeighbors.size() > 1 ) {
+                    ComputerNode prev = ciNeighbors.get(ciNeighbors.size() - 2);
+                    prev.addNeighbor(ci);
+                }
+
+                // Add analogous edges for Cj
+                List<ComputerNode> cjNeighbors = cj.getOutNeighbors();
+                if( cjNeighbors.size() > 1 ) {
+                    ComputerNode prev = cjNeighbors.get(cjNeighbors.size() - 2);
+                    prev.addNeighbor(cj);
+                }
+            }
             createGraphCalled = true;
         }
     }

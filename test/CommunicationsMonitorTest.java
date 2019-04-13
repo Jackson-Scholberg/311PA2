@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class CommunicationsMonitorTest {
 
@@ -62,6 +64,20 @@ public class CommunicationsMonitorTest {
         assertTrue(monitor.getComputerMapping(3) != null);
         assertTrue(monitor.getComputerMapping(4) != null);
         assertTrue(monitor.getComputerMapping(5) == null);
+
+        // Test C1 Communications
+        List<ComputerNode> c1Mapping = monitor.getComputerMapping(1);
+        assertEquals(2, c1Mapping.size());
+        ComputerNode c1Four = c1Mapping.get(0);
+        ComputerNode c1Twelve = c1Mapping.get(1);
+        assertEquals(1, c1Four.getID());
+        assertEquals(4, c1Four.getTimestamp());
+        assertEquals(1, c1Twelve.getID());
+        assertEquals(12, c1Twelve.getTimestamp());
+
+        // Test C1 Neighbors
+        assertEquals(3, c1Four.getOutNeighbors().size());
+
 
     }
 
