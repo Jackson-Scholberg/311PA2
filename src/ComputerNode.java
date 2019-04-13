@@ -15,6 +15,8 @@ public class ComputerNode {
     private int ID;
     private int timestamp;
     private ArrayList<ComputerNode> neighbors;
+    private Color color;
+    private ComputerNode prev;
 
     /**
      * ComputerNode constructor.
@@ -24,7 +26,9 @@ public class ComputerNode {
     public ComputerNode(int ID, int timestamp) {
         this.ID = ID;
         this.timestamp = timestamp;
-        this.neighbors = new ArrayList<ComputerNode>();
+        this.neighbors = new ArrayList<>();
+        this.color = Color.WHITE;
+        this.prev = null;
     }
 
     /**
@@ -59,5 +63,21 @@ public class ComputerNode {
 
     public void addNeighbor(ComputerNode n) {
         neighbors.add(n);
+    }
+
+    public void setColor(Color color){
+        this.color = color;
+    }
+
+    public void setPrev(ComputerNode prev){
+        this.prev = prev;
+    }
+
+    public Color getColor(){
+        return color;
+    }
+
+    public ComputerNode getPrev(){
+        return prev;
     }
 }

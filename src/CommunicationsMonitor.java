@@ -160,13 +160,10 @@ public class CommunicationsMonitor {
      * @param graph graph of trace data
      */
     public void DFS(HashMap<Integer, List<ComputerNode>> graph){
-
-        Color[] visited = new Color[graph.size()];
-
         for (List<ComputerNode> list : graph.values()){
             for(ComputerNode node : list){
-                if (visited[node.getID()] == Color.WHITE)
-                    DFSVisit(node, visited);
+                if (node.getColor() == Color.WHITE)
+                    DFSVisit(node);
             }
 
         }
@@ -176,14 +173,15 @@ public class CommunicationsMonitor {
      * Recursive helper for DFS
      *
      * @param node node hit at this level of recursion
-     * @param visited array of colors for each node
      */
-    public void DFSVisit(ComputerNode node, Color[] visited){
-        visited[node.getID()] = Color.GREY;
+    public void DFSVisit(ComputerNode node){
+
+        node.setColor(Color.GREY);
         for(ComputerNode neighbor : node.getOutNeighbors()){
-            if (visited[neighbor.getID()] == Color.WHITE)
-                DFSVisit(neighbor, visited);
+            if (node.getColor() == Color.WHITE)
+                neighbor.setPrev(node);
+                DFSVisit(neighbor);
         }
-        visited[node.getID()] = Color.BLACK;
+        node.setColor(Color.BLACK);
     }
 }
