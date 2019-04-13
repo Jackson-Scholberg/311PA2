@@ -14,6 +14,7 @@ public class CommunicationsMonitor {
 
 //    instance variables
     private ArrayList<ComputerNode> communicationList;
+    private HashMap<Integer, ComputerNode> computerMapping;
 
     /**
      * Constructor with no parameters
@@ -21,6 +22,7 @@ public class CommunicationsMonitor {
     public CommunicationsMonitor() {
         // TODO -- implement
         communicationList = new ArrayList<ComputerNode>();
+        computerMapping = new HashMap<Integer, ComputerNode>();
     }
 
     /**
