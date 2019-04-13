@@ -98,8 +98,8 @@ public class CommunicationsMonitorTest {
         assertEquals(1, c2Four.getOutNeighbors().get(0).getID());
         assertEquals(4, c2Four.getOutNeighbors().get(0).getTimestamp());
         assertEquals(2, c2Four.getOutNeighbors().get(1).getID());
-//        assertEquals(8,
-//                c1Four.getOutNeighbors().get(1).getTimestamp());
+        assertEquals(8,
+                c2Four.getOutNeighbors().get(1).getTimestamp());
 
         // Test C3 Communications
         List<ComputerNode> c3Mapping = monitor.getComputerMapping(3);
@@ -111,30 +111,27 @@ public class CommunicationsMonitorTest {
         // Test C3 Neighbors
         assertEquals(1, c3Eight.getOutNeighbors().size());
         assertEquals(4, c3Eight.getOutNeighbors().get(0).getID());
-        assertEquals(8, c3Eight.getOutNeighbors().get(0).getTimestamp());
+        assertEquals(8,
+                c3Eight.getOutNeighbors().get(0).getTimestamp());
 
         // Test C4 Communications
         List<ComputerNode> c4Mapping = monitor.getComputerMapping(4);
-//        assertEquals(2, c4Mapping.size());
+        //assertEquals(2, c4Mapping.size());
         ComputerNode c4Eight = c4Mapping.get(0);
         ComputerNode c4Twelve = c4Mapping.get(1);
         assertEquals(4, c4Eight.getID());
         assertEquals(8, c4Eight.getTimestamp());
-//        assertEquals(4, c4Twelve);
-//        assertEquals(12, c4Twelve);
+        assertEquals(4, c4Twelve.getID());
+        assertEquals(12, c4Twelve.getTimestamp());
 
         // Test C4 Neighbors
-//        assertEquals(3, c4Eight.getOutNeighbors().size());
+        assertEquals(3, c4Eight.getOutNeighbors().size());
         assertEquals(2, c4Eight.getOutNeighbors().get(0).getID());
         assertEquals(8, c4Eight.getOutNeighbors().get(0).getTimestamp());
-//        assertEquals(3, c4Eight.getOutNeighbors().get(1).getID());
+        assertEquals(3, c4Eight.getOutNeighbors().get(1).getID());
         assertEquals(8, c4Eight.getOutNeighbors().get(1).getTimestamp());
-//        assertEquals(4, c4Eight.getOutNeighbors().get(2).getID());
-//        assertEquals(12, c4Eight.getOutNeighbors().get(2).getTimestamp());
-
-
-
-
+        assertEquals(4, c4Eight.getOutNeighbors().get(2).getID());
+        assertEquals(12, c4Eight.getOutNeighbors().get(2).getTimestamp());
     }
 
     @Test

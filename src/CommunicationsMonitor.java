@@ -56,6 +56,8 @@ public class CommunicationsMonitor {
             // Add key entries for each computer to HashMap
             for(int i = 0; i < communicationList.size(); i++) {
                 CommunicationTriple comm = communicationList.get(i);
+                boolean ciExists = false;
+                boolean cjExists = false;
 
                 // Initialize computers (keys) in HashMap if they don't exist
                 computerMapping.computeIfAbsent(comm.getCi(),
@@ -63,17 +65,39 @@ public class CommunicationsMonitor {
                 computerMapping.computeIfAbsent(comm.getCj(),
                         k -> new ArrayList<ComputerNode>());
 
-                // Create two ComputerNodes from triple
+                // Create new nodes
                 ComputerNode ci = new ComputerNode(comm.getCi(), comm.getTk());
                 ComputerNode cj = new ComputerNode(comm.getCj(), comm.getTk());
+
+                // If nodes already exist in graph, apply directed edges to
+                //  instead of creating new nodes
+                List<ComputerNode> ciList = getComputerMapping(comm.getCi());
+                for(int j = 0; j < ciList.size(); j++) {
+                    ComputerNode cur = ciList.get(j);
+
+                    if( cur.getID() == comm.getCi() &&
+                            cur.getTimestamp() == comm.getTk()) {
+                        ci = cur;
+                        ciExists = true;
+                    }
+                }
+                List<ComputerNode> cjList = getComputerMapping(comm.getCj());
+                for(int j = 0; j < cjList.size(); j++) {
+                    ComputerNode cur = cjList.get(j);
+                    if( cur.getID() == comm.getCj() &&
+                            cur.getTimestamp() == comm.getTk()) {
+                        cj = cur;
+                        cjExists = true;
+                    }
+                }
 
                 // Add directed edges of triple to nodes
                 ci.addNeighbor(cj);
                 cj.addNeighbor(ci);
 
                 // Add references of nodes to HashMap
-                computerMapping.get(comm.getCi()).add(ci);
-                computerMapping.get(comm.getCj()).add(cj);
+                if (!ciExists) computerMapping.get(comm.getCi()).add(ci);
+                if (!cjExists) computerMapping.get(comm.getCj()).add(cj);
 
                 // Add analogous edges for Ci
                 List<ComputerNode> ciMapping =
