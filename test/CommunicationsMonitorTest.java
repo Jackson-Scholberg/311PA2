@@ -126,7 +126,7 @@ public class CommunicationsMonitorTest {
     }
 
     @Test
-    public void queryInfection() {
+    public void queryInfectionExampleOne() {
         List<ComputerNode> infectedList = monitor.queryInfection(1, 3, 2, 8);
         assertEquals(5, infectedList.size());
         assertEquals(1, infectedList.get(0).getID());
@@ -139,6 +139,30 @@ public class CommunicationsMonitorTest {
         assertEquals(8, infectedList.get(3).getTimestamp());
         assertEquals(3, infectedList.get(4).getID());
         assertEquals(8, infectedList.get(4).getTimestamp());
+    }
+
+    @Test
+    public void queryInfectionExampleTwo() {
+        // Create Example 2 graph
+        monitor = new CommunicationsMonitor();
+        monitor.addCommunication(2, 3, 8);
+        monitor.addCommunication(1, 4, 12);
+        monitor.addCommunication(1, 2, 14);
+        monitor.createGraph();
+
+        // Test that C3 never gets infected
+        List<ComputerNode> infectedList = monitor.queryInfection(1, 3, 2, 15);
+        assertEquals(null, infectedList);
+
+        // Test C2 gets infected
+        infectedList = monitor.queryInfection(1, 2, 2, 15);
+        assertEquals(3, infectedList.size());
+        assertEquals(1, infectedList.get(0).getID());
+        assertEquals(12, infectedList.get(0).getTimestamp());
+        assertEquals(1, infectedList.get(1).getID());
+        assertEquals(14, infectedList.get(1).getTimestamp());
+        assertEquals(2, infectedList.get(2).getID());
+        assertEquals(14, infectedList.get(2).getTimestamp());
     }
 
     @Test
