@@ -11,23 +11,22 @@ public class CommunicationsMonitorTest {
 
     // Instance variables
     CommunicationsMonitor monitor;
-    CommunicationTriple comm1;
-    CommunicationTriple comm2;
-    CommunicationTriple comm3;
-    CommunicationTriple comm4;
 
     @Before
     public void initialize() {
+        // Create graph from Example 1
         monitor = new CommunicationsMonitor();
-        comm1 = new CommunicationTriple(1, 2, 4);
-        comm2 = new CommunicationTriple(2, 4, 8);
-        comm3 = new CommunicationTriple(3, 4, 8);
-        comm4 = new CommunicationTriple(1, 4, 12);
+        monitor.addCommunication(2, 4, 8);
+        monitor.addCommunication(1, 4, 12);
+        monitor.addCommunication(1, 2, 4);
+        monitor.addCommunication(3, 4, 8);
+        monitor.createGraph();
     }
 
     @Test
     public void addCommunication() {
         // Initial size should be zero
+        monitor = new CommunicationsMonitor();
         assertEquals(0, monitor.getCommunicationList().size());
 
         // Insert a tuple
@@ -42,14 +41,6 @@ public class CommunicationsMonitorTest {
 
     @Test
     public void createGraph() {
-
-        // Test that the list gets sorted
-        monitor.addCommunication(2, 4, 8);
-        monitor.addCommunication(1, 4, 12);
-        monitor.addCommunication(1, 2, 4);
-        monitor.addCommunication(3, 4, 8);
-        monitor.createGraph();
-
         // Test that array was sorted
         ArrayList<CommunicationTriple> commList =
                 monitor.getCommunicationList();
@@ -136,6 +127,18 @@ public class CommunicationsMonitorTest {
 
     @Test
     public void queryInfection() {
+        List<ComputerNode> infectedList = monitor.queryInfection(1, 3, 2, 8);
+        assertEquals(5, infectedList.size());
+        assertEquals(1, infectedList.get(0).getID());
+        assertEquals(4, infectedList.get(0).getTimestamp());
+        assertEquals(2, infectedList.get(1).getID());
+        assertEquals(4, infectedList.get(1).getTimestamp());
+        assertEquals(2, infectedList.get(2).getID());
+        assertEquals(8, infectedList.get(2).getTimestamp());
+        assertEquals(4, infectedList.get(3).getID());
+        assertEquals(8, infectedList.get(3).getTimestamp());
+        assertEquals(3, infectedList.get(4).getID());
+        assertEquals(8, infectedList.get(4).getTimestamp());
     }
 
     @Test

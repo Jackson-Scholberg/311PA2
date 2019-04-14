@@ -167,15 +167,12 @@ public class CommunicationsMonitor {
         DFSVisit(infected);
 
         // Check if each node can be reached from infected
-        for (List<ComputerNode> list : computerMapping.values()) {
-            for (ComputerNode curNode : list) {
-                if( curNode.getColor() == Color.BLACK &&
-                        curNode.getID() == c2 &&
-                        curNode.getTimestamp() <= y) { // Computer can be
-                                                       // infected
-                    // Return infected path from c1 to c2
-                    return createInfectedPath(infected, curNode);
-                }
+        List<ComputerNode> c2List = getComputerMapping(c2);
+        for( ComputerNode curNode : c2List) {
+            if (curNode.getColor() == Color.BLACK &&
+                    curNode.getTimestamp() <= y) { // Computer can be infected
+                // Return infected path from c1 to c2
+                return createInfectedPath(infected, curNode);
             }
         }
         return null;    // c2 cannot be infected
@@ -247,12 +244,12 @@ public class CommunicationsMonitor {
      *
      * @param node node hit at this level of recursion
      */
-    public void DFSVisit(ComputerNode node){
+    private void DFSVisit(ComputerNode node){
 
         node.setColor(Color.GREY);
         for(ComputerNode neighbor : node.getOutNeighbors()){
             neighbor.setCC(node.getCC());
-            if (node.getColor() == Color.WHITE){
+            if (neighbor.getColor() == Color.WHITE){
                 neighbor.setPrev(node);
                 DFSVisit(neighbor);
             }
@@ -266,7 +263,7 @@ public class CommunicationsMonitor {
      * @param end
      * @return
      */
-    public List<ComputerNode> createInfectedPath(ComputerNode start,
+    private List<ComputerNode> createInfectedPath(ComputerNode start,
                                                  ComputerNode end) {
         List<ComputerNode> infectedPath = new ArrayList<ComputerNode>();
         ComputerNode curNode = end;
