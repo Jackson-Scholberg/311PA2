@@ -11,7 +11,7 @@ import java.util.*;
 public class CommunicationsMonitor {
 
     // Instance variables
-    private ArrayList<CommunicationTriple> communicationList;
+    private List<CommunicationTriple> communicationList;
     private HashMap<Integer, List<ComputerNode>> computerMapping;
     private boolean createGraphCalled = false;
 
@@ -19,8 +19,7 @@ public class CommunicationsMonitor {
      * Constructor with no parameters
      */
     public CommunicationsMonitor() {
-        // TODO -- implement
-        communicationList = new ArrayList<CommunicationTriple>();
+        communicationList = new LinkedList<CommunicationTriple>();
         computerMapping = new HashMap<Integer, List<ComputerNode>>();
     }
 
@@ -61,9 +60,9 @@ public class CommunicationsMonitor {
 
                 // Initialize computers (keys) in HashMap if they don't exist
                 computerMapping.computeIfAbsent(comm.getCi(),
-                        k -> new ArrayList<ComputerNode>());
+                        k -> new LinkedList<ComputerNode>());
                 computerMapping.computeIfAbsent(comm.getCj(),
-                        k -> new ArrayList<ComputerNode>());
+                        k -> new LinkedList<ComputerNode>());
 
                 // Create new nodes
                 ComputerNode ci = new ComputerNode(comm.getCi(), comm.getTk());
@@ -212,7 +211,7 @@ public class CommunicationsMonitor {
      * Returns the communication list, before it's turned into a graph
      * @return
      */
-    public ArrayList<CommunicationTriple> getCommunicationList() {
+    public List<CommunicationTriple> getCommunicationList() {
         return communicationList;
     }
 
@@ -268,7 +267,7 @@ public class CommunicationsMonitor {
      */
     private List<ComputerNode> createInfectedPath(ComputerNode start,
                                                  ComputerNode end) {
-        List<ComputerNode> infectedPath = new ArrayList<ComputerNode>();
+        List<ComputerNode> infectedPath = new LinkedList<ComputerNode>();
         ComputerNode curNode = end;
         while(curNode != start) {
             infectedPath.add(0, curNode);

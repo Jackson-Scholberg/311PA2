@@ -1,10 +1,6 @@
 import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class CommunicationsMonitorTest {
@@ -39,7 +35,7 @@ public class CommunicationsMonitorTest {
         monitor = createExampleOne();
 
         // Test that array was sorted
-        ArrayList<CommunicationTriple> commList =
+        List<CommunicationTriple> commList =
                 monitor.getCommunicationList();
         assertEquals(4, commList.get(0).getTk());
         assertEquals(8, commList.get(1).getTk());
