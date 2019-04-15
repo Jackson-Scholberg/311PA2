@@ -177,10 +177,29 @@ public class CommunicationsMonitorTest {
 
     @Test
     public void getComputerMapping() {
+        // Test that empty HashMap is initialized on object creation
+        assertEquals(0, monitor.getComputerMapping().size());
+
+        // Insert tuple and create graph
+        monitor.addCommunication(1, 2, 4);
+        monitor.createGraph();
+
+        // Test that mapping has been updated
+        assertEquals(2, monitor.getComputerMapping().size());
     }
 
     @Test
     public void getComputerMapping1() {
+        // Invalid key value should return null list
+        assertEquals(null, monitor.getComputerMapping(1));
+
+        // Insert tuple and create graph
+        monitor.addCommunication(1, 2, 4);
+        monitor.createGraph();
+
+        // Test that mapping has been updated
+        assertEquals(1, monitor.getComputerMapping(1).size());
+        assertEquals(null, monitor.getComputerMapping(3));
     }
 
     @Test
