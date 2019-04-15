@@ -53,8 +53,7 @@ public class CommunicationsMonitor {
             Collections.sort(communicationList);
 
             // Add key entries for each computer to HashMap
-            for(int i = 0; i < communicationList.size(); i++) {
-                CommunicationTriple comm = communicationList.get(i);
+            for(CommunicationTriple comm : communicationList) {
                 boolean ciExists = false;
                 boolean cjExists = false;
 
