@@ -35,7 +35,7 @@ public class CommunicationsMonitor {
      * @param timestamp
      */
     public void addCommunication(int c1, int c2, int timestamp) {
-        // Ignore if createGraph() is called
+        // Ignore if createGraph() was called
         if( !createGraphCalled ) {
 
             // Add new communication to communication list
@@ -48,7 +48,7 @@ public class CommunicationsMonitor {
      * method should run in O(n + mlogm) time.
      */
     public void createGraph() {
-        if( !createGraphCalled ) {
+        if( !createGraphCalled ) {  // Don't create graph more than once
 
             // Sort the communications list
             Collections.sort(communicationList);
@@ -69,21 +69,18 @@ public class CommunicationsMonitor {
                 ComputerNode ci = new ComputerNode(comm.getCi(), comm.getTk());
                 ComputerNode cj = new ComputerNode(comm.getCj(), comm.getTk());
 
-                // If nodes already exist in graph, apply directed edges to
-                //  instead of creating new nodes
+                // If nodes with duplicate parameters already exist, use
+                // existing rather than creating new nodes.
                 List<ComputerNode> ciList = getComputerMapping(comm.getCi());
-                for(int j = 0; j < ciList.size(); j++) {
-                    ComputerNode cur = ciList.get(j);
-
+                List<ComputerNode> cjList = getComputerMapping(comm.getCj());
+                for(ComputerNode cur : ciList) {
                     if( cur.getID() == comm.getCi() &&
                             cur.getTimestamp() == comm.getTk()) {
                         ci = cur;
                         ciExists = true;
                     }
                 }
-                List<ComputerNode> cjList = getComputerMapping(comm.getCj());
-                for(int j = 0; j < cjList.size(); j++) {
-                    ComputerNode cur = cjList.get(j);
+                for(ComputerNode cur : cjList) {
                     if( cur.getID() == comm.getCj() &&
                             cur.getTimestamp() == comm.getTk()) {
                         cj = cur;
@@ -95,7 +92,8 @@ public class CommunicationsMonitor {
                 ci.addNeighbor(cj);
                 cj.addNeighbor(ci);
 
-                // Add references of nodes to HashMap
+                // Add references of nodes to HashMap, if they don't already
+                // exist
                 if (!ciExists) computerMapping.get(comm.getCi()).add(ci);
                 if (!cjExists) computerMapping.get(comm.getCj()).add(cj);
 
@@ -140,22 +138,23 @@ public class CommunicationsMonitor {
      */
     public List<ComputerNode> queryInfection(int c1, int c2, int x, int y) {
 
-        // Find first infected node after given timestamp
+        // Find first infected node of Computer c1 after given timestamp
         List<ComputerNode> c1List = getComputerMapping(c1);
         ComputerNode infected = null;
-        for(int i = 0; i < c1List.size(); i++) {
-            if(c1List.get(i).getTimestamp() >= x) {
-                infected = c1List.get(i);
-                break;
+        for(ComputerNode curNode : c1List) {
+
+            // Check if computer can be infected
+            if(curNode.getTimestamp() >= x) {
+                infected = curNode;
+                break;  // Found infected computer
             }
         }
 
         // If no node is infected, return null
-        if(infected == null) {
-            return null;
-        }
+        if(infected == null) return null;
 
-        // Set all nodes to default DFS values
+        // Set all nodes to default DFS values.
+        //  Note: This is the first step in a normal DFS call.
         for (List<ComputerNode> list : computerMapping.values()){
             for(ComputerNode node : list){
                 node.setColor(Color.WHITE);
@@ -166,11 +165,15 @@ public class CommunicationsMonitor {
         // Run DFS Visit to find connected components
         DFSVisit(infected);
 
-        // Check if each node can be reached from infected
+        // Check each node of Computer c2 for infection
         List<ComputerNode> c2List = getComputerMapping(c2);
         for( ComputerNode curNode : c2List) {
+
+            // Check if Computer can be infected
+            //  Note: If node is black, it can be reached from infected node
             if (curNode.getColor() == Color.BLACK &&
-                    curNode.getTimestamp() <= y) { // Computer can be infected
+                    curNode.getTimestamp() <= y) {
+
                 // Return infected path from c1 to c2
                 return createInfectedPath(infected, curNode);
             }
