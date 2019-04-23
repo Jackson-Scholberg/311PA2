@@ -39,6 +39,12 @@ public class CommunicationsMonitor {
 
             // Add new communication to communication list
             communicationList.add(new CommunicationTriple(c1, c2, timestamp));
+
+            // Initialize computers (keys) in HashMap if they don't exist
+            computerMapping.computeIfAbsent(c1,
+                    k -> new LinkedList<ComputerNode>());
+            computerMapping.computeIfAbsent(c2,
+                    k -> new LinkedList<ComputerNode>());
         }
     }
 
@@ -56,12 +62,6 @@ public class CommunicationsMonitor {
             for(CommunicationTriple comm : communicationList) {
                 boolean ciExists = false;
                 boolean cjExists = false;
-
-                // Initialize computers (keys) in HashMap if they don't exist
-                computerMapping.computeIfAbsent(comm.getCi(),
-                        k -> new LinkedList<ComputerNode>());
-                computerMapping.computeIfAbsent(comm.getCj(),
-                        k -> new LinkedList<ComputerNode>());
 
                 // Create new nodes
                 ComputerNode ci = new ComputerNode(comm.getCi(), comm.getTk());
