@@ -158,9 +158,7 @@ public class CommunicationsMonitor {
         if(c2Infected == null) {
             return null;    // c2 cannot be infected
         }
-        else {
-            return createInfectedPath(c1Infected, c2Infected);
-        }
+        return createInfectedPath(c1Infected, c2Infected);
     }
 
     /**
@@ -200,7 +198,10 @@ public class CommunicationsMonitor {
 
     /**
      * Creates a BFS tree from the given node, returning a node if it is
-     * infected
+     * infected.
+     *
+     * Note: Runs in O(m) time
+     *
      * @param node - starting, infected node
      * @param c2 - the computer to test for infection
      * @param y - the timestamp to test for infection
@@ -245,6 +246,9 @@ public class CommunicationsMonitor {
 
     /**
      * Creates an infected path from the start node to the infected node
+     *
+     * Note: Runs in O(m) time
+     *
      * @param start
      * @param end
      * @return
