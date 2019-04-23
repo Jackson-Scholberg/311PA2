@@ -71,15 +71,17 @@ public class CommunicationsMonitor {
                 // existing rather than creating new nodes.
                 List<ComputerNode> ciList = getComputerMapping(comm.getCi());
                 List<ComputerNode> cjList = getComputerMapping(comm.getCj());
-                for(ComputerNode cur : ciList) {
-                    if( cur.equals(ci)) {
-                        ci = cur;
+                if( ciList.size() > 0 ) {
+                    ComputerNode lastCi = ciList.get(ciList.size() - 1);
+                    if( ci.equals(lastCi) ) {
+                        ci = lastCi;
                         ciExists = true;
                     }
                 }
-                for(ComputerNode cur : cjList) {
-                    if( cur.equals(cj)) {
-                        cj = cur;
+                if( cjList.size() > 0 ) {
+                    ComputerNode lastCj = cjList.get(cjList.size() - 1);
+                    if( cj.equals(lastCj) ) {
+                        cj = lastCj;
                         cjExists = true;
                     }
                 }
