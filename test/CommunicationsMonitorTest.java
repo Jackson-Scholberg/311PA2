@@ -198,23 +198,6 @@ public class CommunicationsMonitorTest {
         assertEquals(null, monitor.getComputerMapping(3));
     }
 
-    @Test
-    public void DFS(){
-        monitor.addCommunication(1,2,4);
-        monitor.addCommunication(2,4,8);
-        monitor.addCommunication(3,4,8);
-        monitor.addCommunication(1,4,12);
-        monitor.createGraph();
-
-        monitor.DFS(monitor.getComputerMapping());
-
-        for (List<ComputerNode> list : monitor.getComputerMapping().values()){
-            for(ComputerNode node : list){
-                assertEquals(Color.BLACK, node.getColor());
-            }
-        }
-    }
-
     //--------------------------------------------------------------------------
     // Helper Methods
     //--------------------------------------------------------------------------

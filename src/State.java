@@ -1,0 +1,3 @@
+public enum State {
+    UNDISCOVERED, DISCOVERED, PROCESSED;
+}

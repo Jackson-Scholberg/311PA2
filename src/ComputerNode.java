@@ -16,10 +16,10 @@ public class ComputerNode {
     private int timestamp;
     private List<ComputerNode> neighbors;
 
-    // DFS tree variables
-    private Color color;
+    // BFS variables
+    private int dist;
+	private Color color;
     private ComputerNode prev;
-    private int cc;
 
     /**
      * ComputerNode constructor.
@@ -30,7 +30,6 @@ public class ComputerNode {
         this.ID = ID;
         this.timestamp = timestamp;
         this.neighbors = new LinkedList<>();
-        this.cc = 0;
     }
 
     /**
@@ -65,30 +64,33 @@ public class ComputerNode {
     public void addNeighbor(ComputerNode n) {
         neighbors.add(n);
     }
+	
+	public Color getColor(){
+        return color;
+    }
 
     public void setColor(Color color){
         this.color = color;
+    }
+	
+	public ComputerNode getPrev(){
+        return prev;
     }
 
     public void setPrev(ComputerNode prev){
         this.prev = prev;
     }
 
-    public Color getColor(){
-        return color;
+
+
+    public int getDist() {
+        return dist;
     }
 
-    public ComputerNode getPrev(){
-        return prev;
+    public void setDist(int dist) {
+        this.dist = dist;
     }
 
-    public int getCC(){
-        return cc;
-    }
-
-    public void setCC(int cc){
-        this.cc = cc;
-    }
 
     /**
      * Test ComputerNode equality based on ID and timestamp fields
@@ -114,3 +116,4 @@ public class ComputerNode {
                 other.getTimestamp() == this.getTimestamp();
     }
 }
+
