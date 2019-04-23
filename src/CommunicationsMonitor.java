@@ -201,7 +201,11 @@ public class CommunicationsMonitor {
     /**
      * Creates a BFS tree from the given node, returning a node if it is
      * infected
-     * @param node
+     * @param node - starting, infected node
+     * @param c2 - the computer to test for infection
+     * @param y - the timestamp to test for infection
+     * @return - node of computer c2 that is infected, or null if none are
+     *           found
      */
     private ComputerNode BFS(ComputerNode node, int c2, int y) {
 
