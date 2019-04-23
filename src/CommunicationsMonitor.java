@@ -72,15 +72,13 @@ public class CommunicationsMonitor {
                 List<ComputerNode> ciList = getComputerMapping(comm.getCi());
                 List<ComputerNode> cjList = getComputerMapping(comm.getCj());
                 for(ComputerNode cur : ciList) {
-                    if( cur.getID() == comm.getCi() &&
-                            cur.getTimestamp() == comm.getTk()) {
+                    if( cur.equals(ci)) {
                         ci = cur;
                         ciExists = true;
                     }
                 }
                 for(ComputerNode cur : cjList) {
-                    if( cur.getID() == comm.getCj() &&
-                            cur.getTimestamp() == comm.getTk()) {
+                    if( cur.equals(cj)) {
                         cj = cur;
                         cjExists = true;
                     }

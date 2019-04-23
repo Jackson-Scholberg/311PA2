@@ -15,6 +15,8 @@ public class ComputerNode {
     private int ID;
     private int timestamp;
     private List<ComputerNode> neighbors;
+
+    // DFS tree variables
     private Color color;
     private ComputerNode prev;
     private int cc;
@@ -86,5 +88,29 @@ public class ComputerNode {
 
     public void setCC(int cc){
         this.cc = cc;
+    }
+
+    /**
+     * Test ComputerNode equality based on ID and timestamp fields
+     * @param o - ComputerNode object to compare to
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+
+        // Return true if object is compared with itself
+        if(o == this) return true;
+
+        // Return false if trying to compare with a non ComputerNode object
+        if(!(o instanceof ComputerNode)) {
+            return false;
+        }
+
+        // Typecast to ComputerNode
+        ComputerNode other = (ComputerNode) o;
+
+        // Compare with ID and timestamp
+        return other.getID() == this.getID() &&
+                other.getTimestamp() == this.getTimestamp();
     }
 }
