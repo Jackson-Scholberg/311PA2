@@ -24,6 +24,5 @@ public class TestThingsToTest {
 
 		List<ComputerNode> node = cm.queryInfection(1, com.length, 0, 0);
 		assertEquals(new ComputerNode(com.length, 0), node.get(com.length - 1));
-
 	}
 }

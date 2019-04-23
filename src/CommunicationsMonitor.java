@@ -149,17 +149,8 @@ public class CommunicationsMonitor {
         // If no node is infected, return null
         if(infected == null) return null;
 
-        // Set all nodes to default DFS values.
-        //  Note: This is the first step in a normal DFS call.
-        for (List<ComputerNode> list : computerMapping.values()){
-            for(ComputerNode node : list){
-                node.setColor(Color.WHITE);
-                node.setPrev(null);
-            }
-        }
-
         // Run DFS Visit to find connected components
-        DFSVisit(infected);
+        BFS(infected);
 
         // Check each node of Computer c2 for infection
         List<ComputerNode> c2List = getComputerMapping(c2);
@@ -213,47 +204,37 @@ public class CommunicationsMonitor {
     }
 
     /**
-     * DFS taking in HashMap version of our graph
-     *
-     * @param graph graph of trace data
+     * Creates a BFS tree from the given node
+     * @param node
      */
-    public void DFS(HashMap<Integer, List<ComputerNode>> graph){
+    private void BFS(ComputerNode node) {
 
-        for (List<ComputerNode> list : graph.values()){
-            for(ComputerNode node : list){
-                node.setColor(Color.WHITE);
-                node.setPrev(null);
+        // Set initial node values
+        for(List<ComputerNode> list : computerMapping.values()) {
+            for(ComputerNode curNode : list) {
+                curNode.setColor(Color.WHITE);
+                curNode.setDist(Integer.MAX_VALUE);
+                curNode.setPrev(null);
             }
         }
+        node.setColor(Color.GREY);
+        node.setDist(0);
 
-        int ctr = 1;
-        for (List<ComputerNode> list : graph.values()){
-            for(ComputerNode node : list){
-                if (node.getColor() == Color.WHITE){
-                    node.setCC(ctr);
-                    ctr++;
-                    DFSVisit(node);
+        // Create BFS tree
+        Queue<ComputerNode> q = new LinkedList<>();
+        q.add(node);
+        while(q.size() != 0) {
+            ComputerNode u = q.remove();
+            for(ComputerNode neighbor: u.getOutNeighbors()) {
+                if(neighbor.getColor() == Color.WHITE) {
+                    neighbor.setColor(Color.GREY);
+                    neighbor.setDist(u.getDist() + 1);
+                    neighbor.setPrev(u);
+                    q.add(neighbor);
                 }
             }
+            u.setColor(Color.BLACK);
         }
-    }
-
-    /**
-     * Recursive helper for DFS
-     *
-     * @param node node hit at this level of recursion
-     */
-    private void DFSVisit(ComputerNode node){
-
-        node.setColor(Color.GREY);
-        for(ComputerNode neighbor : node.getOutNeighbors()){
-            neighbor.setCC(node.getCC());
-            if (neighbor.getColor() == Color.WHITE){
-                neighbor.setPrev(node);
-                DFSVisit(neighbor);
-            }
-        }
-        node.setColor(Color.BLACK);
     }
 
     /**
