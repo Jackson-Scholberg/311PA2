@@ -138,36 +138,29 @@ public class CommunicationsMonitor {
 
         // Find first infected node of Computer c1 after given timestamp
         List<ComputerNode> c1List = getComputerMapping(c1);
-        ComputerNode infected = null;
+        ComputerNode c1Infected = null;
         for(ComputerNode curNode : c1List) {
 
             // Check if computer can be infected
             if(curNode.getTimestamp() >= x) {
-                infected = curNode;
+                c1Infected = curNode;
                 break;  // Found infected computer
             }
         }
 
         // If no node is infected, return null
-        if(infected == null) return null;
+        if(c1Infected == null) return null;
 
-        // Run DFS Visit to find connected components
-        BFS(infected);
+        // Run BFS to find infected c2 node
+        ComputerNode c2Infected = BFS(c1Infected, c2, y);
 
-        // Check each node of Computer c2 for infection
-        List<ComputerNode> c2List = getComputerMapping(c2);
-        for( ComputerNode curNode : c2List) {
-
-            // Check if Computer can be infected
-            //  Note: If node is black, it can be reached from infected node
-            if (curNode.getColor() == Color.BLACK &&
-                    curNode.getTimestamp() <= y) {
-
-                // Return infected path from c1 to c2
-                return createInfectedPath(infected, curNode);
-            }
+        // Return infected path
+        if(c2Infected == null) {
+            return null;    // c2 cannot be infected
         }
-        return null;    // c2 cannot be infected
+        else {
+            return createInfectedPath(c1Infected, c2Infected);
+        }
     }
 
     /**
@@ -206,10 +199,11 @@ public class CommunicationsMonitor {
     }
 
     /**
-     * Creates a BFS tree from the given node
+     * Creates a BFS tree from the given node, returning a node if it is
+     * infected
      * @param node
      */
-    private void BFS(ComputerNode node) {
+    private ComputerNode BFS(ComputerNode node, int c2, int y) {
 
         // Set initial node values
         for(List<ComputerNode> list : computerMapping.values()) {
@@ -236,7 +230,13 @@ public class CommunicationsMonitor {
                 }
             }
             u.setColor(Color.BLACK);
+
+            // Test for node infection
+            if(u.getID() == c2 && u.getTimestamp() <= y) {
+                return u;
+            }
         }
+        return null;
     }
 
     /**
