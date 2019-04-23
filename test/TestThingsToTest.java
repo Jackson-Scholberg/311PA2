@@ -23,7 +23,6 @@ public class TestThingsToTest {
 		cm.createGraph();
 
 		List<ComputerNode> node = cm.queryInfection(1, com.length, 0, 0);
-		assertEquals(com.length, node.get(com.length - 1).getID());
-		assertEquals(0, node.get(com.length - 1).getTimestamp());
+		assertEquals(new ComputerNode(com.length, 0), node.get(com.length - 1));
 	}
 }

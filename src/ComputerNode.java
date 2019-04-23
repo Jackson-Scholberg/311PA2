@@ -81,8 +81,6 @@ public class ComputerNode {
         this.prev = prev;
     }
 
-
-
     public int getDist() {
         return dist;
     }
@@ -90,7 +88,6 @@ public class ComputerNode {
     public void setDist(int dist) {
         this.dist = dist;
     }
-
 
     /**
      * Test ComputerNode equality based on ID and timestamp fields
