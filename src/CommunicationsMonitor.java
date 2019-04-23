@@ -158,7 +158,7 @@ public class CommunicationsMonitor {
 
             // Check if Computer can be infected
             //  Note: If node is black, it can be reached from infected node
-            if (curNode.getState() == State.PROCESSED &&
+            if (curNode.getColor() == Color.BLACK &&
                     curNode.getTimestamp() <= y) {
 
                 // Return infected path from c1 to c2
@@ -212,12 +212,12 @@ public class CommunicationsMonitor {
         // Set initial node values
         for(List<ComputerNode> list : computerMapping.values()) {
             for(ComputerNode curNode : list) {
-                curNode.setState(State.UNDISCOVERED);
+                curNode.setColor(Color.WHITE);
                 curNode.setDist(Integer.MAX_VALUE);
                 curNode.setPrev(null);
             }
         }
-        node.setState(State.DISCOVERED);
+        node.setColor(Color.GREY);
         node.setDist(0);
 
         // Create BFS tree
@@ -226,14 +226,14 @@ public class CommunicationsMonitor {
         while(q.size() != 0) {
             ComputerNode u = q.remove();
             for(ComputerNode neighbor: u.getOutNeighbors()) {
-                if(neighbor.getState() == State.UNDISCOVERED) {
-                    neighbor.setState(State.DISCOVERED);
+                if(neighbor.getColor() == Color.WHITE) {
+                    neighbor.setColor(Color.GREY);
                     neighbor.setDist(u.getDist() + 1);
                     neighbor.setPrev(u);
                     q.add(neighbor);
                 }
             }
-            u.setState(State.PROCESSED);
+            u.setColor(Color.BLACK);
         }
     }
 
