@@ -1,5 +1,8 @@
 /**
  * Simple container class that holds a communication triple
+ * @author Gabriel Stackhouse
+ * @author Jackson Scholberg
+ * @author Zachary Gorman
  */
 public class CommunicationTriple implements Comparable<CommunicationTriple>{
 
