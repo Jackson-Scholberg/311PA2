@@ -8,6 +8,12 @@ public class CommunicationTriple implements Comparable<CommunicationTriple>{
     private int cj;
     private int tk;
 
+    /**
+     * The communication triple.
+     * @param ci first computer in the triple
+     * @param cj second computer in the triple
+     * @param tk timestamp of the communication
+     */
     public CommunicationTriple(int ci, int cj, int tk) {
         this.ci = ci;
         this.cj = cj;
