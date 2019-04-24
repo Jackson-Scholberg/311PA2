@@ -139,7 +139,7 @@ public class CommunicationsMonitor {
         // Find first infected node of Computer c1 after given timestamp
         List<ComputerNode> c1List = getComputerMapping(c1);
         if (c1List == null) return null;
-        
+
         ComputerNode c1Infected = null;
         for(ComputerNode curNode : c1List) {
 
