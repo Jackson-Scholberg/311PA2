@@ -198,6 +198,15 @@ public class CommunicationsMonitorTest {
         assertEquals(null, monitor.getComputerMapping(3));
     }
 
+    @Test
+    public void queryInfectionBeforeCreateGraph() {
+        monitor.addCommunication(2, 4, 8);
+        monitor.addCommunication(1, 4, 12);
+        monitor.addCommunication(1, 2, 4);
+        monitor.addCommunication(3, 4, 8);
+        assertEquals(null, monitor.queryInfection(1, 3, 2, 8));
+    }
+
     //--------------------------------------------------------------------------
     // Helper Methods
     //--------------------------------------------------------------------------
